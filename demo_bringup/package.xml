@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>demo_bringup</name>
+  <version>0.1.0</version>
+  <description>launch 파일과 파라미터 yaml 만 담는 bringup 패키지</description>
+  <maintainer email="roboticsmaster@naver.com">pa</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- launch 가 실행 시점에 필요로 하는 것들 -->
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>demo_py_pkg</exec_depend>
+  <exec_depend>demo_cpp_pkg</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

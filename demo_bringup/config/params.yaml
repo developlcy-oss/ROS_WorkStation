@@ -1,0 +1,16 @@
+# 노드 파라미터 파일.
+#
+# 최상위 키는 노드의 전체이름(FQN)과 매칭된다.
+# '/**' 는 네임스페이스 와일드카드라서, 노드를 '/talker' 로 띄우든
+# '/demo/talker' 로 띄우든 아래 값이 그대로 적용된다.
+# 와일드카드를 안 쓰면 키를 '/demo/talker:' 처럼 정확히 적어야 하고,
+# 네임스페이스를 바꾸는 순간 파라미터가 조용히 무시된다.
+
+/**/talker:
+  ros__parameters:
+    publish_period: 1.0
+    message_prefix: "Hello from Python"
+
+/**/listener:
+  ros__parameters:
+    log_prefix: "C++ listener"
