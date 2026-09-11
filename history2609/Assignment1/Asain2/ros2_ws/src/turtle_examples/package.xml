@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>turtle_examples</name>
+  <version>0.1.0</version>
+  <description>
+    Physical AI Lv.1 모듈 ② 문제 5~9 학생용 예제 코드 (ament_python).
+    학생이 만드는 패키지 이름은 turtle_py 입니다. 이 예제 패키지는 이름 충돌을 피하려고
+    turtle_examples 라는 별도 이름을 씁니다. 여기 코드를 참고해 turtle_py 에 직접 구현하세요.
+  </description>
+  <maintainer email="student@example.com">student</maintainer>
+  <license>Apache-2.0</license>
+
+  <!--
+    [문제 6·8 — 의존성 선언이 왜 중요한가]
+    - <depend> 는 build_depend + build_export_depend + exec_depend 를 한 줄로 합친 것입니다.
+      Python 패키지는 컴파일이 없으니 exec_depend 만으로도 "실행" 은 되지만,
+      colcon 이 "빌드 순서" 를 정할 때도 이 선언을 봅니다.
+    - turtle_interfaces 를 <depend> 로 적었기 때문에 colcon 은 의존 그래프를 위상 정렬해
+      turtle_interfaces → turtle_examples 순으로 빌드합니다. 선언을 빼면 두 패키지가
+      병렬로 빌드되다가 "from turtle_interfaces.action import DrawPolygon" 이
+      실행 시점에 ModuleNotFoundError 를 낼 수 있습니다.
+    - 인터페이스를 노드 패키지와 분리한 이유: 인터페이스는 C++ 패키지(turtle_cpp)도
+      같이 써야 하는 "공용 계약" 이고, ament_python 은 rosidl 코드 생성을 못 하기 때문입니다.
+      (turtle_interfaces/package.xml 의 주석도 함께 읽어 보세요.)
+  -->
+
+  <!-- ROS 2 Python 클라이언트 라이브러리 -->
+  <depend>rclpy</depend>
+  <!-- geometry_msgs/Twist : /turtle1/cmd_vel -->
+  <depend>geometry_msgs</depend>
+  <!-- std_msgs/Float32 : /turtle_distance, std_msgs/Header : WaypointList.header -->
+  <depend>std_msgs</depend>
+  <!-- std_srvs/SetBool, Trigger, Empty : 문제 5 자체 서비스 서버 + /clear -->
+  <depend>std_srvs</depend>
+  <!-- turtlesim/msg/Pose, turtlesim/srv/*, turtlesim/action/RotateAbsolute -->
+  <depend>turtlesim</depend>
+  <!-- 문제 6 커스텀 인터페이스. 반드시 선언해야 빌드 순서가 보장됩니다. -->
+  <depend>turtle_interfaces</depend>
+  <!-- 액션 상태 코드(GoalStatus) 와 취소 응답(CancelGoal) 상수 -->
+  <depend>action_msgs</depend>
+  <!-- 파라미터 콜백 결과 타입 SetParametersResult, ParameterDescriptor -->
+  <depend>rcl_interfaces</depend>
+  <!-- launch 파일 실행에 필요 (ros2 launch, launch_ros.actions.Node) -->
+  <exec_depend>ros2launch</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

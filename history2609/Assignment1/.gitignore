@@ -1,0 +1,32 @@
+# C / C++
+*.o
+*.a
+*.so
+*.out
+*.exe
+
+# ROS2 / colcon
+**/build/
+**/install/
+**/log/
+
+# Python
+**/__pycache__/
+**/.pytest_cache/
+
+# Virtual environments
+**/.venv/
+**/venv/
+**/env/
+
+# IDE
+.vscode/
+
+# C++ executables without extension (파일 특별 규칙)
+Asain2/cpp_basics/motor_test
+Asain2/cpp_basics/stop_distance
+Asain2/cpp_basics/sensors/lidar_test
+Asain2/cpp_basics/sensors/main
+
+# Jupyter
+**/.ipynb_checkpoints/

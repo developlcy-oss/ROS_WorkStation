@@ -1,0 +1,33 @@
+# config/params.yaml — 문제 9 파라미터 파일.
+#
+# 구조 :  <노드 이름>:            ← 실행파일 이름이 아니라 "노드 이름" (launch 의 name=, 코드의 super().__init__('...'))
+#           ros__parameters:      ← 이 키는 고정 문구 (밑줄 두 개)
+#             <파라미터>: <값>    ← 타입은 값의 모양으로 정해짐: 10.0 → double, 10 → int, "a" → string
+#
+# 타입 주의 : publish_rate 를 10 으로 쓰면 int 가 되어 double 로 선언한 노드가 거부합니다. 반드시 10.0.
+#
+# 문제 9 실험 : warn_distance 를 2.5 → 0.8 로 바꾸고 launch 만 다시 실행하세요 (재빌드 불필요,
+#              --symlink-install 로 빌드했을 때). 경고가 훨씬 자주 찍히는 것을 report.md 에 대조해 남깁니다.
+#
+# 네임스페이스가 있는 노드는 아래처럼 중첩해 적습니다 (spawn_second:=true 로 띄운 /turtle2/turtle_distance_publisher).
+# 모든 노드에 같은 값을 주고 싶으면 최상위 키를 "/**" 로 두는 와일드카드도 있습니다.
+
+turtle_distance_publisher:
+  ros__parameters:
+    publish_rate: 10.0        # [Hz] /turtle_distance 발행 주기
+
+turtle_distance_subscriber:
+  ros__parameters:
+    warn_distance: 2.5        # [m] 원점 거리가 이 값을 넘으면 WARN 로그. 실험: 0.8
+
+polygon_action_server:
+  ros__parameters:
+    linear_speed: 1.0           # [m/s] 변을 따라 전진하는 최대 속도
+    angular_speed: 1.0          # [rad/s] 꼭짓점에서 회전하는 최대 각속도
+    control_rate: 20.0          # [Hz] cmd_vel 발행·취소 검사 주기
+    segment_timeout_factor: 3.0 # 이론 시간의 몇 배까지 기다렸다 abort 할지 (벽 충돌 대비)
+
+turtle2:
+  turtle_distance_publisher:
+    ros__parameters:
+      publish_rate: 5.0         # 두 번째 발행자는 일부러 다른 주기 → ros2 topic hz 로 구분 가능

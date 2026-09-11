@@ -1,0 +1,14 @@
+# 문제 6 — 거북이가 정다각형을 그리게 하는 액션.
+# 액션 파일은 "---" 두 개로 목표(goal) / 결과(result) / 피드백(feedback) 세 구역을 나눕니다.
+# 순서가 goal → result → feedback 임에 주의하세요 (goal → feedback → result 가 아닙니다).
+
+# ---------- 목표 (goal) ----------
+int32   sides         # 변의 개수 (3 이상)
+float64 side_length   # 한 변의 길이 [m]
+---
+# ---------- 결과 (result) ----------
+float64 total_distance   # 실제로 이동한 총 거리 [m] (취소되면 그때까지의 거리)
+---
+# ---------- 피드백 (feedback) ----------
+int32   completed_sides  # 지금까지 완성한 변의 수
+float32 progress         # 진행률 0.0 ~ 1.0 (= completed_sides / sides)

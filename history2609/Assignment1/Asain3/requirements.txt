@@ -1,0 +1,27 @@
+# Lv.1 모듈 ③ — 로봇 좌표 변환 수학 라이브러리
+#
+# 설치 (Windows PowerShell)
+#   python -m venv .venv
+#   .\.venv\Scripts\Activate.ps1
+#   python -m pip install --upgrade pip
+#   pip install -r requirements.txt
+#
+# 설치 (macOS / Linux)
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   python -m pip install --upgrade pip
+#   pip install -r requirements.txt
+
+numpy>=1.24
+matplotlib>=3.7
+scipy>=1.10
+pytest>=7.0
+jupyterlab>=4.0
+
+# ---------------------------------------------------------------------------
+# 사내 PC 에서 설치는 되는데 import 가 막히는 경우
+#   ImportError: DLL load failed ... 애플리케이션 제어 정책에서 이 파일을 차단했습니다
+# 라면 WDAC/AppLocker 가 특정 휠의 DLL 을 막는 것입니다.
+# 해당 패키지를 한 단계 낮은 버전으로 설치하면 대개 해결됩니다.
+#   예) pip install "scipy==1.15.3" "pyzmq==26.2.0"
+# ---------------------------------------------------------------------------
